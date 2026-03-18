@@ -6,7 +6,10 @@ async function cargarProductos() {
         const datos = await respuesta.text();
         const filas = datos.split("\n").slice(1); 
         const contenedor = document.getElementById("contenedor-productos");
-        contenedor.innerHTML = ""; 
+        
+        if (!contenedor) return;
+
+        let acumuladorHTML = "";
 
         filas.forEach(fila => {
             const columnas = fila.split(/,|;/); 
@@ -16,10 +19,9 @@ async function cargarProductos() {
                 const precio = columnas[1].trim();
                 const imagenNombre = columnas[2] ? columnas[2].trim() : "";
                 const descripcion = columnas[3] ? columnas[3].trim() : ""; 
-
                 const rutaFoto = `img/${imagenNombre}`;
 
-                const cardHTML = `
+                acumuladorHTML += `
                     <div class="card">
                         <h3>${nombre}</h3>
                         <p class="subtitulo-prod">${descripcion}</p>
@@ -32,17 +34,20 @@ async function cargarProductos() {
                         </div>
                     </div>
                 `;
-                contenedor.innerHTML += cardHTML;
             }
         });
+
+        contenedor.innerHTML = acumuladorHTML; 
+
     } catch (error) {
         console.error("Error:", error);
     }
 }
 
+window.onload = cargarProductos;
+
 function enviarPedido() {
     const inputs = document.querySelectorAll('.cantidad');
-    
     let mensaje = "Hola Mari! Pedido de Instinto Papel:\n\n";
     let hayProductos = false;
 
@@ -65,6 +70,3 @@ function enviarPedido() {
     const url = "https://wa.me/" + telefono + "?text=" + encodeURIComponent(mensaje);
     window.open(url, '_blank');
 }
-
-
-cargarProductos();
