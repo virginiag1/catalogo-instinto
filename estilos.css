@@ -30,8 +30,9 @@ body {
     gap: 30px;
     max-width: 1200px;
     margin: 40px auto;
-    padding: 20px;
-    background-color: transparent !important; 
+    padding: 0 20px;
+    justify-items: center;
+    align-items: start;
 }
 
 header {
@@ -48,16 +49,6 @@ header h1 {
     font-weight: 700;
     text-transform: uppercase;
     text-shadow: 2px 2px 0px white, 4px 4px 0px var(--fucsia-suave);
-}
-
-#contenedor-productos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
-    justify-items: center;
 }
 
 .card {
@@ -150,6 +141,11 @@ input[type="number"]:focus {
     border: 3px solid white;
 }
 
+.btn-whatsapp:hover {
+    transform: translateY(-5px);
+    background-color: #d80098;
+    box-shadow: 0 15px 35px rgba(255, 0, 179, 0.5);
+}
 .btn-whatsapp:hover {
     transform: translateY(-5px);
     background-color: #d80098;
